@@ -88,7 +88,7 @@ public class LintDelete {
     }
 
     /**
-     * 解析nodePath  是那种资源文件
+     * 解析nodePath  是哪种资源文件，目的是忽略掉这些文件
      *
      * @param issueMessage
      * @param nodePath
