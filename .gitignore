@@ -8,3 +8,7 @@
 /build
 /captures
 .externalNativeBuild
+Tool/libs/
+Tool/src/main/java/gongtong/tool/lib/lint/lintpath/
+Tool/src/main/res/drawable/
+sample/libs/
