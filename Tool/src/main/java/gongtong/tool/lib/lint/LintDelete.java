@@ -20,8 +20,8 @@ import javax.xml.parsers.ParserConfigurationException;
  ***********************************************/
 
 public class LintDelete {
-    private static final String BASE_PATH = "/Users/hehongqing/Android/middlem/BaseLib/sample/src/main/assets/lint/";
-    private static final String LINT_FILE = "lint-results.xml";
+    private static final String BASE_PATH = "/Users/hehongqing/Android/ToolLib/Tool/src/main/java/gongtong/tool/lib/lint/path";
+    private static final String LINT_FILE = "lint_result.xml";
 
     public static void main(String[] args) {
         toReadLint();
