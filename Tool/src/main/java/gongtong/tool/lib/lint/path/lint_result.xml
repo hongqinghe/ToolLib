@@ -1,0 +1,1645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 3.0.1">
+
+    <issue
+        id="ObsoleteLintCustomCheck"
+        severity="Warning"
+        message="Lint found one or more custom checks using its older Java API; these checks are still run in compatibility mode, but this causes duplicated parsing, and in the next version lint will no longer include this legacy mode. Make sure the following lint detectors are upgraded to the new API: butterknife.lint.InvalidR2UsageDetector"
+        category="Lint"
+        priority="10"
+        summary="Obsolete custom lint check"
+        explanation="Lint can be extended with &quot;custom checks&quot;: additional checks implemented by developers and libraries to for example enforce specific API usages required by a library or a company coding style guideline.&#xA;&#xA;The Lint APIs are not yet stable, so these checks may either cause a performance, degradation, or stop working, or provide wrong results.&#xA;&#xA;This warning flags custom lint checks that are found to be using obsolete APIs and will need to be updated to run in the current lint environment.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app"/>
+    </issue>
+
+    <issue
+        id="BatteryLife"
+        severity="Warning"
+        message="Declaring a broadcastreceiver for `android.net.conn.CONNECTIVITY_CHANGE` is deprecated for apps targeting N and higher. In general, apps should not rely on this broadcast and instead use `JobScheduler` or `GCMNetworkManager`."
+        category="Correctness"
+        priority="5"
+        summary="Battery Life Issues"
+        explanation="This issue flags code that either&#xA;* negatively affects battery life, or&#xA;* uses APIs that have recently changed behavior to prevent background tasks from consuming memory and battery excessively.&#xA;&#xA;Generally, you should be using `JobScheduler` or `GcmNetworkManager` instead.&#xA;&#xA;For more details on how to update your code, please seehttp://developer.android.com/preview/features/background-optimization.html"
+        url="http://developer.android.com/preview/features/background-optimization.html"
+        urls="http://developer.android.com/preview/features/background-optimization.html"
+        errorLine1="                &lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; />"
+        errorLine2="                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="97"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="ProtectedPermissions"
+        severity="Error"
+        message="Permission is only granted to system apps"
+        category="Correctness"
+        priority="5"
+        summary="Using system app permission"
+        explanation="Permissions with the protection level signature or signatureOrSystem are only granted to system apps. If an app is a regular non-system app, it will never be able to use these permissions."
+        errorLine1="    &lt;uses-permission android:name=&quot;android.permission.WRITE_APN_SETTINGS&quot; />"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="32"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        severity="Fatal"
+        message="&quot;`sobot_back`&quot; is not translated in &quot;en&quot; (English), &quot;zh-TW&quot; (Chinese: Taiwan)"
+        category="Correctness:Messages"
+        priority="8"
+        summary="Incomplete translation"
+        explanation="If an application has more than one locale, then all the strings declared in one language should also be translated in all other languages.&#xA;&#xA;If the string should **not** be translated, you can add the attribute `translatable=&quot;false&quot;` on the `&lt;string>` element, or you can define all your non-translatable strings in a resource file called `donottranslate.xml`. Or, you can ignore the issue with a `tools:ignore=&quot;MissingTranslation&quot;` attribute.&#xA;&#xA;By default this detector allows regions of a language to just provide a subset of the strings and fall back to the standard language strings. You can require all regions to provide a full translation by setting the environment variable `ANDROID_LINT_COMPLETE_REGIONS`.&#xA;&#xA;You can tell lint (and other tools) which language is the default language in your `res/values/` folder by specifying `tools:locale=&quot;languageCode&quot;` for the root `&lt;resources>` element in your resource file. (The `tools` prefix refers to the namespace declaration `http://schemas.android.com/tools`.)"
+        errorLine1="    &lt;string name=&quot;sobot_back&quot;>&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values/strings.xml"
+            line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        severity="Warning"
+        message="`checkClientTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers"
+        category="Security"
+        priority="6"
+        summary="Insecure TLS/SSL trust manager"
+        explanation="This check looks for X509TrustManager implementations whose `checkServerTrusted` or `checkClientTrusted` methods do nothing (thus trusting any certificate chain) which could result in insecure network traffic caused by trusting arbitrary TLS/SSL certificates presented by peers.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/com/loopj/android/http/MySSLSocketFactory$1.class"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        severity="Warning"
+        message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers"
+        category="Security"
+        priority="6"
+        summary="Insecure TLS/SSL trust manager"
+        explanation="This check looks for X509TrustManager implementations whose `checkServerTrusted` or `checkClientTrusted` methods do nothing (thus trusting any certificate chain) which could result in insecure network traffic caused by trusting arbitrary TLS/SSL certificates presented by peers.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/com/loopj/android/http/MySSLSocketFactory$1.class"/>
+    </issue>
+
+    <issue
+        id="ExportedContentProvider"
+        severity="Warning"
+        message="Exported content providers can provide access to potentially sensitive data"
+        category="Security"
+        priority="5"
+        summary="Content provider does not require permission"
+        explanation="Content providers are exported by default and any application on the system can potentially use them to read and write data. If the content provider provides access to sensitive data, it should be protected by specifying `export=false` in the manifest or by protecting it with a permission that can be granted to other applications."
+        errorLine1="        &lt;provider"
+        errorLine2="        ^">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="194"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ExportedReceiver"
+        severity="Warning"
+        message="Exported receiver does not require permission"
+        category="Security"
+        priority="5"
+        summary="Receiver does not require permission"
+        explanation="Exported receivers (receivers which either set `exported=true` or contain an intent-filter and do not specify `exported=false`) should define a permission that an entity must have in order to launch the receiver or bind to it. Without this, any application can use this receiver."
+        errorLine1="        &lt;receiver"
+        errorLine2="        ^">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="83"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ExportedReceiver"
+        severity="Warning"
+        message="Exported receiver does not require permission"
+        category="Security"
+        priority="5"
+        summary="Receiver does not require permission"
+        explanation="Exported receivers (receivers which either set `exported=true` or contain an intent-filter and do not specify `exported=false`) should define a permission that an entity must have in order to launch the receiver or bind to it. Without this, any application can use this receiver."
+        errorLine1="        &lt;receiver"
+        errorLine2="        ^">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="106"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ExportedService"
+        severity="Warning"
+        message="Exported service does not require permission"
+        category="Security"
+        priority="5"
+        summary="Exported service does not require permission"
+        explanation="Exported services (services which either set `exported=true` or contain an intent-filter and do not specify `exported=false`) should define a permission that an entity must have in order to launch the service or bind to it. Without this, any application can use this service."
+        errorLine1="        &lt;service"
+        errorLine2="        ^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="178"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="AllowBackup"
+        severity="Warning"
+        message="On SDK version 23 and up, your app data will be automatically backed up and restored on app install. Consider adding the attribute `android:fullBackupContent` to specify an `@xml` resource which configures which files to backup. More info: https://developer.android.com/training/backup/autosyncapi.html"
+        category="Security"
+        priority="3"
+        summary="AllowBackup/FullBackupContent Problems"
+        explanation="The `allowBackup` attribute determines if an application&apos;s data can be backed up and restored. It is documented at http://developer.android.com/reference/android/R.attr.html#allowBackup&#xA;&#xA;By default, this flag is set to `true`. When this flag is set to `true`, application data can be backed up and restored by the user using `adb backup` and `adb restore`.&#xA;&#xA;This may have security consequences for an application. `adb backup` allows users who have enabled USB debugging to copy application data off of the device. Once backed up, all application data can be read by the user. `adb restore` allows creation of application data from a source specified by the user. Following a restore, applications should not assume that the data, file permissions, and directory permissions were created by the application itself.&#xA;&#xA;Setting `allowBackup=&quot;false&quot;` opts an application out of both backup and restore.&#xA;&#xA;To fix this warning, decide whether your application should support backup, and explicitly set `android:allowBackup=(true|false)&quot;`.&#xA;&#xA;If not set to false, and if targeting API 23 or later, lint will also warn that you should set `android:fullBackupContent` to configure auto backup."
+        url="https://developer.android.com/training/backup/autosyncapi.html"
+        urls="https://developer.android.com/training/backup/autosyncapi.html,http://developer.android.com/reference/android/R.attr.html#allowBackup"
+        errorLine1="    &lt;application"
+        errorLine2="    ^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/AndroidManifest.xml"
+            line="46"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        severity="Warning"
+        message="This folder configuration (`v4`) is unnecessary; `minSdkVersion` is 16. Merge all the resources in this folder into `values-hdpi`."
+        category="Performance"
+        priority="6"
+        summary="Obsolete SDK_INT Version Check"
+        explanation="This check flags version checks that are not necessary, because the `minSdkVersion` (or surrounding known API level) is already at least as high as the version checked for.&#xA;&#xA;Similarly, it also looks for resources in `-vNN` folders, such as `values-v14` where the version qualifier is less than or equal to the `minSdkVersion`, where the contents should be merged into the best folder.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        severity="Warning"
+        message="This folder configuration (`v4`) is unnecessary; `minSdkVersion` is 16. Merge all the resources in this folder into `values-xhdpi`."
+        category="Performance"
+        priority="6"
+        summary="Obsolete SDK_INT Version Check"
+        explanation="This check flags version checks that are not necessary, because the `minSdkVersion` (or surrounding known API level) is already at least as high as the version checked for.&#xA;&#xA;Similarly, it also looks for resources in `-vNN` folders, such as `values-v14` where the version qualifier is less than or equal to the `minSdkVersion`, where the contents should be merged into the best folder.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        severity="Warning"
+        message="Do not place Android context classes in static fields (static reference to `TDFNiftyDialogBuilderUpdate` which has field `tmpContext` pointing to `Context`); this is a memory leak (and also breaks Instant Run)"
+        category="Performance"
+        priority="6"
+        summary="Static Field Leaks"
+        explanation="A static field will leak contexts.&#xA;&#xA;Non-static inner classes have an implicit reference to their outer class. If that outer class is for example a `Fragment` or `Activity`, then this reference means that the long-running handler/loader/task will hold a reference to the activity which prevents it from getting garbage collected.&#xA;&#xA;Similarly, direct field references to activities and fragments from these longer running instances can cause leaks.&#xA;&#xA;ViewModel classes should never point to Views or non-application Contexts."
+        errorLine1="    private static TDFNiftyDialogBuilderUpdate dialogBuilder = null;"
+        errorLine2="            ~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/java/zmsoft/rest/supply/dialog/DialogUpdateUtils.java"
+            line="26"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        severity="Warning"
+        message="Do not place Android context classes in static fields; this is a memory leak (and also breaks Instant Run)"
+        category="Performance"
+        priority="6"
+        summary="Static Field Leaks"
+        explanation="A static field will leak contexts.&#xA;&#xA;Non-static inner classes have an implicit reference to their outer class. If that outer class is for example a `Fragment` or `Activity`, then this reference means that the long-running handler/loader/task will hold a reference to the activity which prevents it from getting garbage collected.&#xA;&#xA;Similarly, direct field references to activities and fragments from these longer running instances can cause leaks.&#xA;&#xA;ViewModel classes should never point to Views or non-application Contexts."
+        errorLine1="    private static Context tmpContext;"
+        errorLine2="            ~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/java/zmsoft/rest/supply/dialog/TDFNiftyDialogBuilderUpdate.java"
+            line="56"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        severity="Warning"
+        message="Do not place Android context classes in static fields (static reference to `TDFNiftyDialogBuilderUpdate` which has field `tmpContext` pointing to `Context`); this is a memory leak (and also breaks Instant Run)"
+        category="Performance"
+        priority="6"
+        summary="Static Field Leaks"
+        explanation="A static field will leak contexts.&#xA;&#xA;Non-static inner classes have an implicit reference to their outer class. If that outer class is for example a `Fragment` or `Activity`, then this reference means that the long-running handler/loader/task will hold a reference to the activity which prevents it from getting garbage collected.&#xA;&#xA;Similarly, direct field references to activities and fragments from these longer running instances can cause leaks.&#xA;&#xA;ViewModel classes should never point to Views or non-application Contexts."
+        errorLine1="    private static TDFNiftyDialogBuilderUpdate instance;"
+        errorLine2="            ~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/java/zmsoft/rest/supply/dialog/TDFNiftyDialogBuilderUpdate.java"
+            line="93"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.common_red_rounded_rectangle` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="&lt;shape"
+        errorLine2="^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable/common_red_rounded_rectangle.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.common_red_style` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable/common_red_style.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.ic_launcher` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-mdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xhdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xxhdpi/ic_launcher.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.ico_pw_red` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/ico_pw_red.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.sobot_back` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/sobot_back.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.sobot_btn_back_selector` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="&lt;selector android:constantSize=&quot;true&quot; xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable/sobot_btn_back_selector.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.color.sobot_color_title_bar_title` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1=" &lt;color name=&quot;sobot_color_title_bar_title&quot;>@color/tdf_hex_333&lt;/color>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values/sobot_colors.xml"
+            line="3"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.sobot_delete_hismsg_selector` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable/sobot_delete_hismsg_selector.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_108PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1=" &lt;dimen name=&quot;sobot_DIMEN_108PX&quot;>35dp&lt;/dimen>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values/sobot_dimens.xml"
+            line="3"
+            column="9"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="6"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="6"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.sobot_more` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/sobot_more.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.login_app_title` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;login_app_title&quot;>二维火供应链&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values/strings.xml"
+            line="3"
+            column="13"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-en/strings.xml"
+            line="3"
+            column="13"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-zh-rTW/strings.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.sobot_back` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;sobot_back&quot;>&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values/strings.xml"
+            line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_100PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_100PX&quot;>90dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="3"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="3"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_1037PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_1037PX&quot;>15dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="4"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="4"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_107PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_107PX&quot;>40dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="5"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="5"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_10PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_10PX&quot;>2dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="7"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="7"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_116PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_116PX&quot;>12dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="8"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="8"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_120PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_120PX&quot;>50dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="9"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="9"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_12PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_12PX&quot;>5dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="10"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="10"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_13PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_13PX&quot;>15dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="11"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="11"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_1400PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_1400PX&quot;>80dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="12"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="12"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_144PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_144PX&quot;>30dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="13"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="13"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_14PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_14PX&quot;>5dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="14"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="14"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_15PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_15PX&quot;>3dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="15"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="15"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_168PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_168PX&quot;>70dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="16"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="16"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_180PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_180PX&quot;>95dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="17"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="17"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_192PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_192PX&quot;>128dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="18"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="18"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_20PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_20PX&quot;>4dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="19"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="19"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_21PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_21PX&quot;>3dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="20"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="20"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_240PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_240PX&quot;>80dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="21"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="21"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_24PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_24PX&quot;>5dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="22"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="22"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_264PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_264PX&quot;>125dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="23"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="23"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_26PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_26PX&quot;>7dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="24"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="24"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_276PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_276PX&quot;>115dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="25"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="25"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_288PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_288PX&quot;>110dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="26"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="26"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_289PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_289PX&quot;>150dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="27"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="27"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_300PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_300PX&quot;>80dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="28"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="28"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_36PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_36PX&quot;>15dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="29"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="29"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_40PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_40PX&quot;>16dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="30"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="30"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_432PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_432PX&quot;>180dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="31"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="31"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_44PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_44PX&quot;>18dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="32"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="32"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_480PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_480PX&quot;>200dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="33"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="33"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_481PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_481PX&quot;>220dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="34"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="34"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_48PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_48PX&quot;>20dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="35"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="35"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_504PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_504PX&quot;>336dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="36"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="36"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_552PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_552PX&quot;>250dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="37"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="37"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_576PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_576PX&quot;>384dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="38"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="38"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_5PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_5PX&quot;>1dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="39"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="39"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_60PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_60PX&quot;>25dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="40"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="40"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_624PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_624PX&quot;>416dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="41"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="41"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_625PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_625PX&quot;>240dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="42"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="42"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_68PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_68PX&quot;>25dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="43"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="43"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_72PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_72PX&quot;>25dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="44"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="44"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_77PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_77PX&quot;>28dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="45"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="45"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_7PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_7PX&quot;>1.5dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="46"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="46"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_84PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_84PX&quot;>30dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="47"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="47"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_DIMEN_96PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_DIMEN_96PX&quot;>40dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="48"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="48"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_FUDIMEN_7PX` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_FUDIMEN_7PX&quot;>-2dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="49"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="49"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_btn_send_text_size` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_btn_send_text_size&quot;>12sp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="50"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="50"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_pic_img_width` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_pic_img_width&quot;>50dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="51"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="51"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.dimen.sobot_text_title` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;sobot_text_title&quot;>18sp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-hdpi-v4/values-hdpi-v4.xml"
+            line="52"
+            column="12"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/values-xhdpi-v4/values-xhdpi-v4.xml"
+            line="52"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UselessParent"
+        severity="Warning"
+        message="This `RelativeLayout` layout or its `LinearLayout` parent is possibly useless; transfer the `background` attribute to the other view"
+        category="Performance"
+        priority="2"
+        summary="Useless parent layout"
+        explanation="A layout with children that has no siblings, is not a scrollview or a root layout, and does not have a background, can be removed and have its children moved directly into the parent for a flatter and more efficient layout hierarchy."
+        errorLine1="            &lt;RelativeLayout"
+        errorLine2="            ^">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/layout/tdf_niftydialog_update_layout.xml"
+            line="47"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="IconDipSize"
+        severity="Warning"
+        message="The image `ic_launcher.png` varies significantly in its density-independent (dip) size across the various density versions: drawable-hdpi/ic_launcher.png: 320x320 dp (480x480 px), drawable-mdpi/ic_launcher.png: 480x480 dp (480x480 px), drawable-xhdpi/ic_launcher.png: 240x240 dp (480x480 px), drawable-xxhdpi/ic_launcher.png: 160x160 dp (480x480 px)"
+        category="Usability:Icons"
+        priority="5"
+        summary="Icon density-independent size validation"
+        explanation="Checks the all icons which are provided in multiple densities, all compute to roughly the same density-independent pixel (`dip`) size. This catches errors where images are either placed in the wrong folder, or icons are changed to new sizes but some folders are forgotten.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xxhdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xhdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-mdpi/ic_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        severity="Warning"
+        message="The `ic_launcher.png` icon has identical contents in the following configuration folders: drawable-hdpi, drawable-mdpi, drawable-xhdpi, drawable-xxhdpi"
+        category="Usability:Icons"
+        priority="5"
+        summary="Identical bitmaps across various configurations"
+        explanation="If an icon is provided under different configuration parameters such as `drawable-hdpi` or `-v11`, they should typically be different. This detector catches cases where the same icon is provided in different configuration folder which is usually not intentional.">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xxhdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xhdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-mdpi/ic_launcher.png"/>
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-hdpi/ic_launcher.png"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        severity="Warning"
+        message="Missing the following drawables in `drawable-mdpi`: ico_pw_red.png, ico_welcome_01.png, ico_welcome_02.png, ico_welcome_03.png, sobot_back.png... (1 more)"
+        category="Usability:Icons"
+        priority="4"
+        summary="Icon densities validation"
+        explanation="Icons will look best if a custom version is provided for each of the major screen density classes (low, medium, high, extra high). This lint check identifies icons which do not have complete coverage across the densities.&#xA;&#xA;Low density is not really used much anymore, so this check ignores the ldpi density. To force lint to include it, set the environment variable `ANDROID_LINT_INCLUDE_LDPI=true`. For more information on current density usage, see http://developer.android.com/resources/dashboard/screens.html"
+        url="http://developer.android.com/guide/practices/screens_support.html"
+        urls="http://developer.android.com/guide/practices/screens_support.html">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-mdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        severity="Warning"
+        message="Missing the following drawables in `drawable-xhdpi`: ico_pw_red.png, ico_welcome_01.png, ico_welcome_02.png, ico_welcome_03.png, sobot_back.png... (1 more)"
+        category="Usability:Icons"
+        priority="4"
+        summary="Icon densities validation"
+        explanation="Icons will look best if a custom version is provided for each of the major screen density classes (low, medium, high, extra high). This lint check identifies icons which do not have complete coverage across the densities.&#xA;&#xA;Low density is not really used much anymore, so this check ignores the ldpi density. To force lint to include it, set the environment variable `ANDROID_LINT_INCLUDE_LDPI=true`. For more information on current density usage, see http://developer.android.com/resources/dashboard/screens.html"
+        url="http://developer.android.com/guide/practices/screens_support.html"
+        urls="http://developer.android.com/guide/practices/screens_support.html">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xhdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        severity="Warning"
+        message="Missing the following drawables in `drawable-xxhdpi`: ico_pw_red.png, ico_welcome_01.png, ico_welcome_02.png, ico_welcome_03.png, sobot_back.png... (1 more)"
+        category="Usability:Icons"
+        priority="4"
+        summary="Icon densities validation"
+        explanation="Icons will look best if a custom version is provided for each of the major screen density classes (low, medium, high, extra high). This lint check identifies icons which do not have complete coverage across the densities.&#xA;&#xA;Low density is not really used much anymore, so this check ignores the ldpi density. To force lint to include it, set the environment variable `ANDROID_LINT_INCLUDE_LDPI=true`. For more information on current density usage, see http://developer.android.com/resources/dashboard/screens.html"
+        url="http://developer.android.com/guide/practices/screens_support.html"
+        urls="http://developer.android.com/guide/practices/screens_support.html">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/drawable-xxhdpi"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        severity="Warning"
+        message="Missing `contentDescription` attribute on image"
+        category="Accessibility"
+        priority="3"
+        summary="Image without `contentDescription`"
+        explanation="Non-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface.&#xA;&#xA;Note that elements in application screens that are purely decorative and do not provide any content or enable a user action should not have accessibility content descriptions. In this case, just suppress the lint warning with a tools:ignore=&quot;ContentDescription&quot; attribute.&#xA;&#xA;Note that for text fields, you should not set both the `hint` and the `contentDescription` attributes since the hint will never be shown. Just set the `hint`. See http://developer.android.com/guide/topics/ui/accessibility/checklist.html#special-cases."
+        errorLine1="                &lt;ImageView"
+        errorLine2="                ^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/layout/tdf_niftydialog_update_layout.xml"
+            line="54"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        severity="Warning"
+        message="Missing `contentDescription` attribute on image"
+        category="Accessibility"
+        priority="3"
+        summary="Image without `contentDescription`"
+        explanation="Non-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface.&#xA;&#xA;Note that elements in application screens that are purely decorative and do not provide any content or enable a user action should not have accessibility content descriptions. In this case, just suppress the lint warning with a tools:ignore=&quot;ContentDescription&quot; attribute.&#xA;&#xA;Note that for text fields, you should not set both the `hint` and the `contentDescription` attributes since the hint will never be shown. Just set the `hint`. See http://developer.android.com/guide/topics/ui/accessibility/checklist.html#special-cases."
+        errorLine1="    &lt;ImageView"
+        errorLine2="    ^"
+        quickfix="studio">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/layout/tdf_niftydialog_update_layout.xml"
+            line="153"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        severity="Warning"
+        message="Consider adding `android:layout_marginStart=&quot;8dip&quot;` to better support right-to-left layouts"
+        category="Internationalization:Bidirectional Text"
+        priority="5"
+        summary="Using left/right instead of start/end attributes"
+        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.&#xA;&#xA;For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. **NOTE**: If your `minSdkVersion` is less than 17, you should add **both** the older left/right attributes **as well as** the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.&#xA;&#xA;(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
+        errorLine1="                    android:layout_marginLeft=&quot;8dip&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/layout/tdf_niftydialog_update_layout.xml"
+            line="70"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        severity="Warning"
+        message="Use &quot;`start`&quot; instead of &quot;`left`&quot; to ensure correct behavior in right-to-left locales"
+        category="Internationalization:Bidirectional Text"
+        priority="5"
+        summary="Using left/right instead of start/end attributes"
+        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.&#xA;&#xA;For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. **NOTE**: If your `minSdkVersion` is less than 17, you should add **both** the older left/right attributes **as well as** the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.&#xA;&#xA;(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
+        errorLine1="                android:gravity=&quot;left|center_vertical&quot;"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/hehongqing/WorkSpace/Android/work/SupplyApp/app/src/main/res/layout/tdf_niftydialog_update_layout.xml"
+            line="91"
+            column="34"/>
+    </issue>
+
+</issues>
